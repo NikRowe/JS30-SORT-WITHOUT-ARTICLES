@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sort Without Articles</title>
 </head>
+
 <body>
 
   <style>
@@ -26,12 +28,12 @@
       padding: 0;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
-    
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
-    
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -40,16 +42,56 @@
       color: #ffc600;
       text-decoration: none;
     }
-
   </style>
+
 
   <ul id="bands"></ul>
 
-<script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+  <script>
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+    const bandsList = document.querySelector('#bands')
 
 
-</script>
+    const strip = (bandName) => {
+      return bandName.replace(/^(a\ |an\ |the\ )/gmi, '').trim()
+    }
+    const sorted = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1)
+
+    bandsList.innerHTML = sorted.map((band, i) => {
+      return `
+        <li>${band}</li>
+          `
+    }).join('')
+
+
+    /* This was my attempt after about 3hours with no success I resumed the video and let Wes teach me how to do it */
+    // const bandsWithArticles = []
+    // const bandsList = document.querySelector('#bands')
+    // const regex = /^(a\ |an\ |the\ )/gmi;
+    // let m
+
+    // const sorted = bands.sort()
+
+    // const mapped = () => bands.map((band, i) => {
+    //   while ((m = regex.exec(band)) !== null) {
+    //     // This is necessary to avoid infinite loops with zero-width matches
+    //     if (m.index === regex.lastIndex) {
+    //       regex.lastIndex++;
+    //     }
+    //     bandsWithArticles.push(m)
+    //   }
+    // });
+
+    // bandsList.innerHTML = bands.map((band, i) => {
+    //   return `
+    //     <li>${band}</li>
+    //       `
+    // }).join('')
+
+
+  </script>
 
 </body>
+
 </html>
